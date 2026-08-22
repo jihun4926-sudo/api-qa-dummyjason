@@ -17,11 +17,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"로그인 성공 시 Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Response has accessToken\", function () {\r",
+                  "pm.test(\"응답에 accessToken 필드 존재 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData).to.have.property(\"accessToken\");\r",
                   "});\r",
@@ -73,11 +73,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Returned user matches logged-in user\", function () {\r",
+                  "pm.test(\"반환된 유저 정보가 로그인한 유저와 일치하는지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"user_id\")));\r",
                   "});"
@@ -121,10 +121,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
-                  "pm.test(\"Product has required fields\", function () {\r",
+                  "\r",
+                  "pm.test(\"상품 응답에 필수 필드(id, title, price) 존재 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData).to.have.property(\"id\");\r",
                   "    pm.expect(jsonData).to.have.property(\"title\");\r",
@@ -160,10 +161,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 201\", function () {\r",
+                  "pm.test(\"상품 생성 성공 시 Status Code 201 확인\", function () {\r",
                   "    pm.response.to.have.status(201);\r",
                   "});\r",
-                  "pm.test(\"Created product has correct title\", function () {\r",
+                  "\r",
+                  "pm.test(\"생성된 상품의 title이 요청한 값과 일치하는지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData.title).to.eql(\"QA Portfolio Test Product\");\r",
                   "    pm.environment.set(\"created_product_id\", jsonData.id);\r",
@@ -207,10 +209,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"상품 수정 성공 시 Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
-                  "pm.test(\"Title was updated\", function () {\r",
+                  "\r",
+                  "pm.test(\"title이 수정한 값으로 정상 반영되었는지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData.title).to.eql(\"Updated Product Title\");\r",
                   "});"
@@ -253,10 +256,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"상품 삭제 성공 시 Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
-                  "pm.test(\"Response shows isDeleted true\", function () {\r",
+                  "\r",
+                  "pm.test(\"응답의 isDeleted 값이 true인지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData.isDeleted).to.eql(true);\r",
                   "});"
@@ -295,11 +299,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 400 or 401\", function () {\r",
+                  "pm.test(\"잘못된 비밀번호 입력 시 Status Code 400 또는 401 확인\", function () {\r",
                   "    pm.expect(pm.response.code).to.be.oneOf([400, 401]);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Error message exists\", function () {\r",
+                  "pm.test(\"에러 메시지가 존재하는지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData).to.have.property(\"message\");\r",
                   "});"
@@ -342,7 +346,7 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 404\", function () {\r",
+                  "pm.test(\"존재하지 않는 상품 조회 시 Status Code 404 확인\", function () {\r",
                   "    pm.response.to.have.status(404);\r",
                   "});"
                 ],
@@ -375,7 +379,7 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 401\", function () {\r",
+                  "pm.test(\"토큰 없이 요청 시 Status Code 401 확인 (인증 우회 이슈 발견됨 - findings 참고)\", function () {\r",
                   "    pm.response.to.have.status(401);\r",
                   "});"
                 ],
@@ -417,10 +421,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
+                  "pm.test(\"limit=0 요청 시 Status Code 200 확인\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
-                  "pm.test(\"Limit=0 returns default or empty list gracefully\", function () {\r",
+                  "\r",
+                  "pm.test(\"limit=0이어도 products 목록이 정상적으로 반환되는지 확인\", function () {\r",
                   "    const jsonData = pm.response.json();\r",
                   "    pm.expect(jsonData).to.have.property(\"products\");\r",
                   "});"
@@ -459,7 +464,7 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 201\", function () {\r",
+                  "pm.test(\"대용량/다국어 페이로드 전송 시 Status Code 201 확인\", function () {\r",
                   "    pm.response.to.have.status(201);\r",
                   "});"
                 ],
